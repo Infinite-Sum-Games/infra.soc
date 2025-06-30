@@ -1,0 +1,49 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Job 1 : Monitoring itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Job 2 : Monitoring the system
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ["localhost:9100"]
+        labels:
+          instance_type: 'server'
+          location: 'local'
+
+  # Job 3 : Monitoring Redis
+  - job_name: 'redis_exporter'
+    static_configs:
+      - targets: ['localhost:9121']
+        labels:
+          service: 'redis'
+          env: 'production'
+
+  # Job 4: Monitoring Postgres
+  - job_name: 'postgres_exporter'
+    statuc_configs:
+      - targets: ['localhost:9187']
+        labels:
+          service: 'postgresql'
+          db_role: 'primary'
+
+  # Job 5: Monitoring API (pulse)
+  - job_name: 'api_monitor'
+    static_configs:
+      - targets: ['localhost:9000']
+        labels:
+          service: 'api'
+          version: '1.0'
+
+  # Job 6: Monitoring Webhook (alfred)
+  - job_name: 'webhook_monitor'
+    static_configs:
+      - targets: ['localhost:9001']
+        labels:
+          service: 'webhook'
+          version: '1.0'
