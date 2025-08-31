@@ -1,0 +1,8 @@
+base-url: "https://amritotsavam.cb.amrita.edu/ntfy"
+behind-proxy: true
+cache-file: "/var/cache/ntfy/cache.db"
+attachment-cache-dir: "/var/lib/ntfy/attachments"
+auth-file: "/var/lib/ntfy/user.db"
+auth-default-access: "deny-all"
+upstream-base-url: "https://ntfy.sh" # Required for iOS
+listen-http: ":8150"
